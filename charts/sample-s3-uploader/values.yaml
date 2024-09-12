@@ -1,0 +1,143 @@
+## @section Common Parameters
+
+## @param replicaCount Number of sample-s3-uploader replicas
+## @openapi3type integer
+## @description Specifies the number of replicas to run the sample-s3-uploader pods.
+replicaCount: 1
+
+## @param image.repository The repository to use for the sample-s3-uploader image.
+## @param image.pullPolicy The pull policy to use for the sample-s3-uploader image.
+## @param image.tag The sample-s3-uploader image tag. Defaults to the chart's AppVersion.
+## @description Configures the container image details including repository, tag, and pull policy.
+image:
+  repository: ghcr.io/csepulveda/sample-s3-uploader
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+## @param imagePullSecrets A list of image pull secrets for the container image.
+## @description A list of image pull secrets for the container image.
+imagePullSecrets: []
+
+## @param nameOverride Override for the name of the Helm release.
+## @description Override for the name of the Helm release.
+nameOverride: ""
+
+## @param fullnameOverride Override for the full name of the Helm release.
+## @description Override for the full name of the Helm release.
+fullnameOverride: ""
+
+## @param serviceAccount.annotations [object] Annotations for service account. Evaluated as a template. Only used if `create` is `true`.
+## @param serviceAccount.create Specifies whether a ServiceAccount should be created.
+## @param serviceAccount.automount Specifies whether the ServiceAccount should auto-mount API credentials.
+## @param serviceAccount.name Name of the service account to use. If not set and create is true, a name is generated using the fullname template.
+## @description Specifies whether to create a service account, along with any annotations or a custom name.
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+## @param podAnnotations [object] Add extra annotations to the sample-s3-uploader pod(s).
+## @description Add custom annotations to the pods running the sample-s3-uploader service.
+podAnnotations: {}
+
+## @param podLabels [object] Add custom labels to the sample-s3-uploader pod(s).
+## @description Add custom labels to the pods running the sample-s3-uploader service.
+podLabels: {}
+
+## @param podSecurityContext [object] Add extra podSecurityContext to the sample-s3-uploader pod(s).
+## @description Configure the security context for the pod, such as file system group settings.
+podSecurityContext: {}
+  # fsGroup: 2000
+
+## @param securityContext [object] Add extra securityContext to the sample-s3-uploader pod(s).
+## @description Configure the security context for the containers, including user permissions and security capabilities.
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+## @param service.type Service type to expose the sample-s3-uploader.
+## @param service.port Port number to expose the sample-s3-uploader service.
+## @description Configuration settings for the service exposed by sample-s3-uploader.
+service:
+  type: ClusterIP
+  port: 80
+
+## @param resources.limits [object] The resources limits for the sample-s3-uploader container.
+## @param resources.requests [object] The requested resources for the sample-s3-uploader container.
+## @description Define resource requests and limits for CPU and memory usage by the sample-s3-uploader container.
+resources:
+  ## Example:
+  ## limits:
+  ##    cpu: 200m
+  ##    memory: 1Gi
+  limits: {}
+  ## Examples:
+  ## requests:
+  ##    memory: 256Mi
+  ##    cpu: 250m
+  requests: {}
+
+## @param livenessProbe.httpGet.path Path for the liveness probe HTTP GET request.
+## @param livenessProbe.httpGet.port Port for the liveness probe HTTP GET request.
+## @description Configuration for the liveness probe, which checks if the application is running.
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+
+## @param readinessProbe.httpGet.path Path for the readiness probe HTTP GET request.
+## @param readinessProbe.httpGet.port Port for the readiness probe HTTP GET request.
+## @description Configuration for the readiness probe, which checks if the application is ready to handle requests.
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+
+## @param autoscaling.enabled Enable or disable autoscaling.
+## @param autoscaling.minReplicas Minimum number of replicas for autoscaling.
+## @param autoscaling.maxReplicas Maximum number of replicas for autoscaling.
+## @param autoscaling.targetCPUUtilizationPercentage Target CPU utilization percentage for autoscaling.
+## @description Configure autoscaling parameters, such as min and max replicas and CPU utilization targets.
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+## @param volumes [array] Additional volumes to be mounted on the sample-s3-uploader pods.
+## @description Additional volumes that can be mounted on the pods.
+volumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
+## @param volumeMounts [array] Additional volume mounts for the sample-s3-uploader containers.
+## @description Additional volume mounts for the sample-s3-uploader containers.
+volumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+## @param nodeSelector [object] Node selector for pod placement.
+## @description Assign node selectors to limit which nodes the pods can be scheduled on.
+nodeSelector: {}
+
+## @param tolerations [array] Tolerations for pods.
+## @description Specify tolerations for the pods to control which tainted nodes the pods can run on.
+tolerations: []
+
+## @param affinity [object] Affinity rules for pod placement.
+## @description Specify affinity rules for scheduling the pods on certain nodes based on conditions.
+affinity: {}
+
+## @param env [array] Environment variables to set in the sample-s3-uploader container.
+## @description Environment variables to set in the sample-s3-uploader container.
+env: []
