@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "trivy-webhook-aws-security-hub.name" -}}
+{{- define "sample-s3-uploader.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "trivy-webhook-aws-security-hub.fullname" -}}
+{{- define "sample-s3-uploader.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,7 +26,7 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "trivy-webhook-aws-security-hub.chart" -}}
+{{- define "sample-s3-uploader.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -34,8 +34,8 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "sample-s3-uploader" -}}
-helm.sh/chart: {{ include "trivy-webhook-aws-security-hub.chart" . }}
-{{ include "trivy-webhook-aws-security-hub.selectorLabels" . }}
+helm.sh/chart: {{ include "sample-s3-uploader.chart" . }}
+{{ include "sample-s3-uploader.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "trivy-webhook-aws-security-hub.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "trivy-webhook-aws-security-hub.name" . }}
+{{- define "sample-s3-uploader.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "sample-s3-uploader.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "trivy-webhook-aws-security-hub.serviceAccountName" -}}
+{{- define "sample-s3-uploader.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "trivy-webhook-aws-security-hub.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "sample-s3-uploader.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

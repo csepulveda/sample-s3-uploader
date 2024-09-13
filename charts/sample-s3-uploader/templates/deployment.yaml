@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "trivy-webhook-aws-security-hub.fullname" . }}
+  name: {{ include "sample-s3-uploader.fullname" . }}
   labels:
     {{- include "sample-s3-uploader" . | nindent 4 }}
 spec:
@@ -10,7 +10,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "trivy-webhook-aws-security-hub.selectorLabels" . | nindent 6 }}
+      {{- include "sample-s3-uploader.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "trivy-webhook-aws-security-hub.serviceAccountName" . }}
+      serviceAccountName: {{ include "sample-s3-uploader.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
