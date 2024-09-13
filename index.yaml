@@ -2,6 +2,19 @@ apiVersion: v1
 entries:
   sample-s3-uploader:
   - apiVersion: v2
+    appVersion: v0.0.4
+    created: "2024-09-13T02:53:04.908240349Z"
+    description: A Helm chart for Kubernetes
+    digest: 825dc5a142a45ab3ddd5762b4c414799e6dc798145a30483ad7c29edef400ca3
+    home: https://github.com/csepulveda/sample-s3-uploader
+    name: sample-s3-uploader
+    sources:
+    - https://github.com/csepulveda/sample-s3-uploader/tree/main/charts/sample-s3-uploader
+    type: application
+    urls:
+    - https://github.com/csepulveda/sample-s3-uploader/releases/download/sample-s3-uploader-0.0.4/sample-s3-uploader-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
     appVersion: v0.0.3
     created: "2024-09-13T02:45:16.136215058Z"
     description: A Helm chart for Kubernetes
@@ -27,4 +40,4 @@ entries:
     urls:
     - https://github.com/csepulveda/sample-s3-uploader/releases/download/sample-s3-uploader-0.0.2/sample-s3-uploader-0.0.2.tgz
     version: 0.0.2
-generated: "2024-09-13T02:45:16.13633831Z"
+generated: "2024-09-13T02:53:04.908255898Z"
